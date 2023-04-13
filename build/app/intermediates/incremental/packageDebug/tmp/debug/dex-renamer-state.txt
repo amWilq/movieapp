@@ -1,4 +1,4 @@
-#Thu Apr 13 18:36:07 CEST 2023
+#Thu Apr 13 21:15:17 CEST 2023
 base.1=C\:\\Users\\Lukasz\\Desktop\\PROJEKTY\\movieapp\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes2.dex
 path.1=classes2.dex
 base.0=C\:\\Users\\Lukasz\\Desktop\\PROJEKTY\\movieapp\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex

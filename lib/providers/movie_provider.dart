@@ -19,8 +19,7 @@ class MovieProvider extends StateNotifier<MovieState> {
         errMessage: '',
         isSuccess: false,
         isError: false,
-        // movies: [],
-        isLoad: state.isLoadMore ? false: true);
+        isLoad: state.isLoadMore ? false : true);
 
     final response = await service.getData(apiPath: apiPath, page: state.page);
     response.fold((l) {

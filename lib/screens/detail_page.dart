@@ -1,12 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:newmovieapp/screens/movie_video.dart';
 import '../model/movie.dart';
 
 class DetailPage extends StatelessWidget {
   final Movie movie;
-  DetailPage(this.movie);
+  final bool isSimpleModeEnabled;
+
+  DetailPage(
+    this.movie,
+    this.isSimpleModeEnabled,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -20,40 +24,6 @@ class DetailPage extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton.icon(
-                      icon: const Icon(Icons.watch_later),
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.all(15.0),
-                        primary: Color(0xFFFF7272),
-                        fixedSize:
-                            Size(MediaQuery.of(context).size.width * 0.425, 65),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                      ),
-                      onPressed: () {},
-                      label: const Text('Add to Watchlist')),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  ElevatedButton.icon(
-                    icon: const Icon(Icons.movie),
-                      style: ElevatedButton.styleFrom(
-                        textStyle: const TextStyle(fontWeight: FontWeight.bold),
-                        padding: const EdgeInsets.all(15.0),
-                        primary: Colors.green,
-                        fixedSize:
-                            Size(MediaQuery.of(context).size.width * 0.425, 65),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                      ),
-                      onPressed: () {
-                        Get.to(MovieVideo(movie));
-                      },
-                      label: const Text('Watch Trailer'))
-                ],
               ))
         ],
       ),
@@ -65,45 +35,50 @@ class DetailPage extends StatelessWidget {
       bottom: 150,
       width: MediaQuery.of(context).size.width,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(10.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(movie.title,
                 style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                    height: 1.75,
+                    height: 1,
                     fontWeight: FontWeight.bold,
-                    fontSize: 22,
+                    fontSize: isSimpleModeEnabled ? 60 : 22,
                     color: Colors.redAccent)),
             const SizedBox(
               height: 8,
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(
-                movie.overview,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyMedium!
-                    .copyWith(height: 1.75, color: Colors.white),
-              ),
+              child: Text(movie.overview,
+                  style: isSimpleModeEnabled
+                      ? Theme.of(context)
+                          .textTheme
+                          .bodyLarge!
+                          .copyWith(height: 1.75, color: Colors.white)
+                      : Theme.of(context)
+                          .textTheme
+                          .bodySmall!
+                          .copyWith(height: 1.75, color: Colors.white)),
             ),
             const SizedBox(
-              height: 10,
+              height: 0,
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     'IMDB Rating: ${movie.vote_average}',
                     style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
-                        fontSize: 16),
+                        fontSize: 22),
                   ),
-                  const SizedBox(width: 5,),
+                  const SizedBox(
+                    width: 5,
+                  ),
                   const Icon(Icons.star, color: Colors.yellowAccent, size: 19),
                 ],
               ),

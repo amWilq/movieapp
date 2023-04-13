@@ -23,84 +23,213 @@ class _HomePageState extends State<HomePage> {
     return DefaultTabController(
       length: 4,
       child: Scaffold(
-        backgroundColor: Color(0xfff354249),
-        appBar: AppBar(
-          centerTitle: false,
-          backgroundColor: Colors.transparent,
-          toolbarHeight: 70,
-          elevation: 0,
-          title: const Text(
-            'Watch Now',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 25,
+          backgroundColor: Color(0xfff354249),
+          appBar: AppBar(
+            centerTitle: false,
+            backgroundColor: Colors.transparent,
+            toolbarHeight: 70,
+            elevation: 0,
+            title: _isSimpleModeEnabled
+                ? Container(
+                    alignment: Alignment.center,
+                    child: const Text(
+                      'Oglądaj',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 50,
+                      ),
+                    ),
+                  )
+                : Container(
+                    alignment: Alignment.center,
+                    child: const Text(
+                      'Oglądaj',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25,
+                      ),
+                    ),
+                  ),
+            bottom: TabBar(
+              isScrollable: true,
+              labelColor: Colors.white,
+              indicatorColor: Colors.red,
+              tabs: _isSimpleModeEnabled
+                  ? [
+                      Tab(
+                        icon: Column(
+                          children: [
+                            Icon(
+                              Icons.play_circle_outline,
+                              size: 30,
+                            ),
+                            Text(
+                              'Odtwarzaj',
+                              style: TextStyle(fontSize: 13),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Tab(
+                        icon: Column(
+                          children: [
+                            Icon(
+                              Icons.star_border_outlined,
+                              size: 30,
+                            ),
+                            Text(
+                              'Popularne',
+                              style: TextStyle(fontSize: 13),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Tab(
+                        icon: Column(
+                          children: [
+                            Icon(
+                              Icons.trending_up_outlined,
+                              size: 30,
+                            ),
+                            Text(
+                              'Najlepsze',
+                              style: TextStyle(fontSize: 13),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Tab(
+                        icon: Column(
+                          children: [
+                            Icon(
+                              Icons.calendar_today_outlined,
+                              size: 30,
+                            ),
+                            Text(
+                              'Nadchodzące',
+                              style: TextStyle(fontSize: 12),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ]
+                  : [
+                      Tab(
+                        icon: Column(
+                          children: [
+                            Icon(
+                              Icons.play_circle_outline,
+                              size: 45,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Tab(
+                        icon: Column(
+                          children: [
+                            Icon(
+                              Icons.star_border_outlined,
+                              size: 45,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Tab(
+                        icon: Column(
+                          children: [
+                            Icon(
+                              Icons.trending_up_outlined,
+                              size: 45,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Tab(
+                        icon: Column(
+                          children: [
+                            Icon(
+                              Icons.calendar_today_outlined,
+                              size: 45,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
             ),
           ),
-          bottom: TabBar(
-            isScrollable: true,
-            labelColor: Colors.white,
-            indicatorColor: Colors.red,
-            tabs: [
-              Tab(text: CategoryType.Now_Playing.name),
-              Tab(text: CategoryType.Popular.name),
-              Tab(text: CategoryType.Top_Rated.name),
-              Tab(text: CategoryType.Upcoming.name),
-            ],
-          ),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(5.0),
-          child: _isSimpleModeEnabled
-              ? SimpleView()
-              : TabBarView(
-                  children: [
-                    TabBarWidget(
-                      categoryType: CategoryType.Now_Playing,
-                      pageKey: 'NowPlaying',
-                    ),
-                    TabBarWidget(
-                      categoryType: CategoryType.Popular,
-                      pageKey: 'Popular',
-                    ),
-                    TabBarWidget(
-                      categoryType: CategoryType.Top_Rated,
-                      pageKey: 'TopRated',
-                    ),
-                    TabBarWidget(
-                      categoryType: CategoryType.Upcoming,
-                      pageKey: 'Upcoming',
-                    )
-                  ],
+          body: Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: TabBarView(
+              children: [
+                TabBarWidget(
+                  categoryType: CategoryType.Now_Playing,
+                  pageKey: 'NowPlaying',
+                  isSimpleModeEnabled: _isSimpleModeEnabled,
                 ),
-        ),
-        drawer: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              DrawerHeader(
+                TabBarWidget(
+                  categoryType: CategoryType.Popular,
+                  pageKey: 'Popular',
+                  isSimpleModeEnabled: _isSimpleModeEnabled,
+                ),
+                TabBarWidget(
+                  categoryType: CategoryType.Top_Rated,
+                  pageKey: 'TopRated',
+                  isSimpleModeEnabled: _isSimpleModeEnabled,
+                ),
+                TabBarWidget(
+                  categoryType: CategoryType.Upcoming,
+                  pageKey: 'Upcoming',
+                  isSimpleModeEnabled: _isSimpleModeEnabled,
+                )
+              ],
+            ),
+          ),
+          drawer: Drawer(
+            child: Column(
+              children: [
+                SwitchListTile(
+                  title: Text(
+                    'Boomer Mode',
+                    style: TextStyle(
+                      fontSize: _isSimpleModeEnabled ? 50 : 20,
+                    ),
+                  ),
+                  subtitle: _isSimpleModeEnabled
+                      ? Text(
+                          'Wyłącz boomerski tryb',
+                          style: TextStyle(
+                              fontSize: _isSimpleModeEnabled ? 30 : 20),
+                        )
+                      : Text(''),
+                  value: _isSimpleModeEnabled,
+                  onChanged: (value) {
+                    setState(() {
+                      _isSimpleModeEnabled = value;
+                    });
+                  },
+                  contentPadding: EdgeInsets.symmetric(
+                      horizontal: 16, vertical: 24), // zwiększenie marginesów
+                ),
+                Expanded(
+                  child: Container(),
+                ),
+                DrawerHeader(
                   decoration: BoxDecoration(
-                    color: Colors.blue,
+                    color: Colors.white,
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[_singOutButton()],
-                  )),
-              SwitchListTile(
-                title: Text('Simple Mode'),
-                subtitle: Text('Enable this to use a simplified view'),
-                value: _isSimpleModeEnabled,
-                onChanged: (value) {
-                  setState(() {
-                    _isSimpleModeEnabled = value;
-                  });
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
+                    children: <Widget>[
+                      _singOutButton(),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          )),
     );
   }
 
@@ -109,7 +238,10 @@ class _HomePageState extends State<HomePage> {
   }
 
   _singOutButton() {
-    return ElevatedButton(onPressed: singOut, child: const Text('Sing out'));
+    return ElevatedButton(
+        onPressed: singOut,
+        child: Text('Wyloguj',
+            style: TextStyle(fontSize: _isSimpleModeEnabled ? 50 : 20)));
   }
 }
 
@@ -120,28 +252,9 @@ class SimpleView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
         child: Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(0.0),
-        child: TabBarView(
-          children: [
-            TabBarWidget(
-              categoryType: CategoryType.Now_Playing,
-              pageKey: 'NowPlaying',
-            ),
-            TabBarWidget(
-              categoryType: CategoryType.Popular,
-              pageKey: 'Popular',
-            ),
-            TabBarWidget(
-              categoryType: CategoryType.Top_Rated,
-              pageKey: 'TopRated',
-            ),
-            TabBarWidget(
-              categoryType: CategoryType.Upcoming,
-              pageKey: 'Upcoming',
-            )
-          ],
-        ),
+      body: Text(
+        'Simple view is enabled',
+        style: TextStyle(fontSize: 24),
       ),
     ));
   }

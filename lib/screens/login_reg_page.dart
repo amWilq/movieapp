@@ -40,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _title() {
-    return const Text('Firebase auth');
+    return const Text('Mobilne Interfejsy Multimedialnie ');
   }
 
   Widget _entryField(String? title, TextEditingController controller) {
@@ -51,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _errorMessage() {
-    return Text(errorMessage == '' ? '' : 'Humm ? $errorMessage');
+    return Text(errorMessage == '' ? '' : '$errorMessage');
   }
 
   Widget _submitButton() {
@@ -59,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
         onPressed: isLogin
             ? singInWithEmailAndPassword
             : createUserWithEmailAndPassword,
-        child: Text(isLogin ? 'Login' : 'Register'));
+        child: Text(isLogin ? 'Zaloguj się' : 'Zarejstruj się'));
   }
 
   Widget _loginOrRegisterButton() {
@@ -69,7 +69,9 @@ class _LoginPageState extends State<LoginPage> {
             isLogin = !isLogin;
           });
         },
-        child: Text(isLogin ? 'register instead' : 'login instead'));
+        child: Text(isLogin
+            ? 'Zarejestruj się zamiast tego'
+            : 'Zamiast tego zaloguj się'));
   }
 
   @override
@@ -86,8 +88,8 @@ class _LoginPageState extends State<LoginPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            _entryField('email', _controllerEmail),
-            _entryField('password', _controllerPassword),
+            _entryField('Email', _controllerEmail),
+            _entryField('Hasło', _controllerPassword),
             _errorMessage(),
             _submitButton(),
             _loginOrRegisterButton()
