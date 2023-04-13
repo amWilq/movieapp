@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "569702723922",
+    "project_id": "mobline-70864",
+    "storage_bucket": "mobline-70864.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:569702723922:android:f6d75bf4b7d95c29598a8b",
+        "android_client_info": {
+          "package_name": "com.example.newmovieapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "569702723922-hhb65jq19uhhvpa9vl7q45spch452l5g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsSRmlKujqG_qq0k9nLOdKIC_5eWJMLl0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "569702723922-hhb65jq19uhhvpa9vl7q45spch452l5g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
